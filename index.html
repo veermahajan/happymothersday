@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Mom's Adventure</title>
+    <style>
+        :root { --pink: #ec4899; --light-pink: #fdf2f8; }
+        body { font-family: -apple-system, sans-serif; background: var(--light-pink); margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        .card { background: white; width: 85%; max-width: 350px; padding: 30px; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: var(--pink); font-size: 24px; }
+        p { color: #4b5563; line-height: 1.5; font-size: 17px; }
+        input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #f3f4f6; border-radius: 10px; font-size: 16px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--pink); }
+        button { background: var(--pink); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card" id="game-card">
+    <h1 id="header">Mother's Day Hunt<br>Аналар куню авы</h1>
+    <p id="instruction">Welcome, Mumma! Find the physical clue at each spot to get the password for the next location.<br>Хош кельдинъ, Мума! Невбеттеки ернинъ парольни алмакъ ичюн эр бир ерде физик ёлны тапынъыз.</p>
+    <input type="text" id="pass-input" placeholder="Enter secret word...">
+    <button onclick="checkPassword()">Unlock Clue<br>Къулфны ачмакъ</button>
+</div>
+
+<script>
+    const huntData = [
+        { location: "Pantry", clue: "I'm where the snacks live. Go find the secret word hidden near your favorite treat!", pass: "YUMMY" },
+        { location: "Laundry Room", clue: "You found it! Now, head to where the clothes go for a spin. Look behind the detergent.", pass: "FRESH" },
+        { location: "TV Room", clue: "Nice! Go to the room where we watch movies. Check under the fluffiest pillow.", pass: "COZY" },
+        { location: "Drawing Room", clue: "Almost there! Go to the Drawing Room and look inside the prettiest book.", pass: "MEMORIES" },
+        { location: "Fridge", clue: "You're on fire, so let's cool down. Go to the coldest spot in the kitchen!", pass: "CHILL" },
+        { location: "Backyard", clue: "The final stretch! Head outside into the sunshine for your surprise.", pass: "GARDEN" },
+        { location: "FINISH", clue: "Happy Mother's Day! I love you! Check the patio chair for your gift.", pass: "DONE" }
+    ];
+
+    let step = 0;
+
+    function checkPassword() {
+        const input = document.getElementById('pass-input').value.toUpperCase().trim();
+        const feedback = document.getElementById('instruction');
+        const header = document.getElementById('header');
+
+        if (step === 0 || input === huntData[step-1].pass) {
+            header.innerText = "Target: " + huntData[step].location;
+            feedback.innerText = huntData[step].clue;
+            document.getElementById('pass-input').value = "";
+            if(step === 0) document.querySelector('button').innerText = "Verify Password";
+            step++;
+        } else {
+            feedback.innerText = "❌ Wrong password! Try looking again, Mom!";
+            feedback.style.color = "red";
+            setTimeout(() => { feedback.style.color = "#4b5563"; feedback.innerText = huntData[step-1].clue; }, 2000);
+        }
+
+        if (step > huntData.length) {
+            header.innerText = "Celebrate!";
+            document.getElementById('pass-input').classList.add('hidden');
+            document.querySelector('button').classList.add('hidden');
+        }
+    }
+</script>
+</body>
+</html>
