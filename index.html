@@ -1,67 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<link rel="apple-touch-icon" href="https://static.vecteezy.com/system/resources/thumbnails/006/507/729/small/cute-happy-mothers-day-greeting-card-illustration-with-heart-shape-bouqet-with-various-floral-flower-doodles-in-simple-hand-drawn-childish-style-mother-day-bright-design-template-vector.jpg">
+
+<link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/thumbnails/006/507/729/small/cute-happy-mothers-day-greeting-card-illustration-with-heart-shape-bouqet-with-various-floral-flower-doodles-in-simple-hand-drawn-childish-style-mother-day-bright-design-template-vector.jpg">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mom's Adventure</title>
+    <title>Mom's Epic Hunt</title>
     <style>
-        :root { --pink: #ec4899; --light-pink: #fdf2f8; }
-        body { font-family: -apple-system, sans-serif; background: var(--light-pink); margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-        .card { background: white; width: 85%; max-width: 350px; padding: 30px; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
-        h1 { color: var(--pink); font-size: 24px; }
-        p { color: #4b5563; line-height: 1.5; font-size: 17px; }
-        input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #f3f4f6; border-radius: 10px; font-size: 16px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: var(--pink); }
-        button { background: var(--pink); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
-        .hidden { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 40px 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 28px;
+            margin: 0 0 15px 0;
+            background: -webkit-linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .emoji-banner { font-size: 50px; margin-bottom: 10px; animation: bounce 2s infinite; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        p { color: #333; font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 25px; }
+        .clue-text { font-weight: 400; font-size: 16px; background: rgba(255,255,255,0.8); padding: 15px; border-radius: 15px; margin-bottom: 25px;}
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.05);
+            outline: none;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+        input:focus { border: 2px solid #ff0844; transform: scale(1.02); }
+
+        button {
+            background: linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 8, 68, 0.3);
+            transition: 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        .hidden { display: none !important; }
+
+        /* Error Animation */
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        /* Confetti Container */
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
     </style>
 </head>
 <body>
 
-<div class="card" id="game-card">
-    <h1 id="header">Mother's Day Hunt<br>Аналар куню авы</h1>
-    <p id="instruction">Welcome, Mumma! Find the physical clue at each spot to get the password for the next location.<br>Хош кельдинъ, Мума! Невбеттеки ернинъ парольни алмакъ ичюн эр бир ерде физик ёлны тапынъыз.</p>
-    <input type="text" id="pass-input" placeholder="Enter secret word...">
-    <button onclick="checkPassword()">Unlock Clue<br>Къулфны ачмакъ</button>
+<canvas id="confetti" class="hidden"></canvas>
+
+<div class="glass-card" id="app-container">
+    <div id="emoji-display" class="emoji-banner">💖</div>
+    <h1 id="title-display">Happy Mother's Day!</h1>
+    
+    <div id="clue-container" class="hidden">
+        <p id="location-display">Target: </p>
+        <div class="clue-text" id="clue-display"></div>
+    </div>
+    
+    <p id="welcome-text">Here's a special app for your scavenger hunt! Wishing you a day as special as you are! 💖</p>
+
+    <input type="text" id="password-input" class="hidden" placeholder="ENTER SECRET WORD" autocomplete="off">
+    <button id="action-btn" onclick="handleAction()">LET'S GO! 🚀</button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
+    // The Game Data
     const huntData = [
-        { location: "Pantry", clue: "I'm where the snacks live. Go find the secret word hidden near your favorite treat!", pass: "YUMMY" },
-        { location: "Laundry Room", clue: "You found it! Now, head to where the clothes go for a spin. Look behind the detergent.", pass: "FRESH" },
-        { location: "TV Room", clue: "Nice! Go to the room where we watch movies. Check under the fluffiest pillow.", pass: "COZY" },
-        { location: "Drawing Room", clue: "Almost there! Go to the Drawing Room and look inside the prettiest book.", pass: "MEMORIES" },
-        { location: "Fridge", clue: "You're on fire, so let's cool down. Go to the coldest spot in the kitchen!", pass: "CHILL" },
-        { location: "Backyard", clue: "The final stretch! Head outside into the sunshine for your surprise.", pass: "GARDEN" },
-        { location: "FINISH", clue: "Happy Mother's Day! I love you! Check the patio chair for your gift.", pass: "DONE" }
+        { location: "******", clue: "With Indian foods and cans of soup,<br>Your first location is fun to snoop,<br>Look below what makes you strong,<br>And in finding your clue, you can't go wrong!", pass: "YUMMY", emoji: "🍪" },
+        { location: "******* Room", clue: "Clothes spin and get washed,<br>In this room, don't get lost,<br>Look behind the soap jugs<br>And find your clue, with lots of hugs!", pass: "FRESH", emoji: "🧺" },
+        { location: "** Room", clue: "In the room you watch your TV shows,<br>Almost always ones you chose.<br>Under from where the music flows,<br>Your next clue inevitably goes.", pass: "COZY", emoji: "📺" },
+        { location: "******* Room", clue: "In the first room any visitor will see,<br>Where comics lie, read by you and me,<br>It is precisely here that you will see,<br>The next clue in your destiny!", pass: "MEMORIES", emoji: "🛋️" },
+        { location: "******", clue: "It's hot today, go somewhere cold,<br>In a place with food, new and old,<br>This little surprise won't have any mold,<br>It's your next clue that it will hold!", pass: "CHILL", emoji: "❄️" },
+        { location: "********", clue: "The chimes over here are loud,<br>Louder than should be allowed,<br>Go where you sit and ruminate, late at night,<br>And find your surprise, you just might!", pass: "GARDEN", emoji: "🌻" }
     ];
 
-    let step = 0;
+    let currentStep = -1; // -1 means the welcome screen
+
+    const ui = {
+        card: document.getElementById('app-container'),
+        emoji: document.getElementById('emoji-display'),
+        title: document.getElementById('title-display'),
+        welcomeText: document.getElementById('welcome-text'),
+        clueContainer: document.getElementById('clue-container'),
+        location: document.getElementById('location-display'),
+        clue: document.getElementById('clue-display'),
+        input: document.getElementById('password-input'),
+        btn: document.getElementById('action-btn')
+    };
+
+    function handleAction() {
+        if (currentStep === -1) {
+            // Start the game, load first clue
+            currentStep = 0;
+            loadClue();
+        } else {
+            // Check password
+            checkPassword();
+        }
+    }
+
+    function loadClue() {
+        // Animate out/in
+        ui.card.style.transform = 'scale(0.95)';
+        setTimeout(() => ui.card.style.transform = 'scale(1)', 150);
+
+        const data = huntData[currentStep];
+        
+        // Hide welcome text, show clue UI
+        ui.welcomeText.classList.add('hidden');
+        ui.clueContainer.classList.remove('hidden');
+        ui.input.classList.remove('hidden');
+        
+        // Update content
+        ui.emoji.innerText = data.emoji;
+        ui.title.innerText = `Clue #${currentStep + 1}`;
+        ui.location.innerText = `📍 Go to: ${data.location}`;
+        ui.clue.innerHTML = data.clue;
+        
+        // Reset input and button
+        ui.input.value = "";
+        ui.input.style.border = "2px solid transparent";
+        ui.btn.innerText = "UNLOCK NEXT CLUE 🔓";
+    }
 
     function checkPassword() {
-        const input = document.getElementById('pass-input').value.toUpperCase().trim();
-        const feedback = document.getElementById('instruction');
-        const header = document.getElementById('header');
+        const guess = ui.input.value.toUpperCase().trim();
+        const correctPass = huntData[currentStep].pass;
 
-        if (step === 0 || input === huntData[step-1].pass) {
-            header.innerText = "Target: " + huntData[step].location;
-            feedback.innerText = huntData[step].clue;
-            document.getElementById('pass-input').value = "";
-            if(step === 0) document.querySelector('button').innerText = "Verify Password";
-            step++;
+        if (guess === correctPass) {
+            // Success! Move to next step
+            currentStep++;
+            if (currentStep >= huntData.length) {
+                showFinale();
+            } else {
+                // Quick success animation before next clue
+                ui.btn.innerText = "CORRECT! 🎉";
+                ui.btn.style.background = "linear-gradient(45deg, #00b09b, #96c93d)";
+                setTimeout(() => {
+                    ui.btn.style.background = ""; // reset
+                    loadClue();
+                }, 800);
+            }
         } else {
-            feedback.innerText = "❌ Wrong password! Try looking again, Mom!";
-            feedback.style.color = "red";
-            setTimeout(() => { feedback.style.color = "#4b5563"; feedback.innerText = huntData[step-1].clue; }, 2000);
+            // Wrong Password Animation
+            ui.card.classList.add('shake');
+            ui.input.style.border = "2px solid #ff0844";
+            ui.btn.innerText = "WRONG! TRY AGAIN ❌";
+            setTimeout(() => {
+                ui.card.classList.remove('shake');
+                ui.btn.innerText = "UNLOCK NEXT CLUE 🔓";
+            }, 1000);
+        }
+    }
+
+    function showFinale() {
+        document.getElementById('confetti').classList.remove('hidden');
+        
+        ui.clueContainer.classList.add('hidden');
+        ui.input.classList.add('hidden');
+        ui.btn.classList.add('hidden');
+        
+        ui.welcomeText.classList.remove('hidden');
+        
+        ui.emoji.innerText = "👑";
+        ui.title.innerText = "YOU DID IT, MOM!";
+        ui.welcomeText.innerHTML = "Happy Mother's Day! <br><br> Look around the backyard for your final present. I love you! ❤️";
+        
+        // Trigger Confetti Explosion
+        var duration = 5 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
         }
 
-        if (step > huntData.length) {
-            header.innerText = "Celebrate!";
-            document.getElementById('pass-input').classList.add('hidden');
-            document.querySelector('button').classList.add('hidden');
-        }
+        var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+            var particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+            }));
+            confetti(Object.assign({}, defaults, { particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+            }));
+        }, 250);
     }
 </script>
 </body>
